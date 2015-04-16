@@ -10,6 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class ZBGame extends Game {
     @Override
     public void create() {
-
+        Gdx.app.log("ZBGame", "created");
     }
 }
