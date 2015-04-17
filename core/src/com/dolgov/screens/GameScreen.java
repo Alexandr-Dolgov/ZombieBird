@@ -3,14 +3,21 @@ package com.dolgov.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.dolgov.gameworld.GameRender;
+import com.dolgov.gameworld.GameWorld;
 
 /**
  * Created by Alexandr on 16.04.2015.
  */
 public class GameScreen implements Screen {
 
+    private GameWorld world;
+    private GameRender render;
+
     public GameScreen(){
         Gdx.app.log("GameScreen", "attached");
+        world = new GameWorld();
+        render = new GameRender();
     }
 
     @Override
