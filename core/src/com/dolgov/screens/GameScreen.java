@@ -13,6 +13,7 @@ public class GameScreen implements Screen {
 
     private GameWorld world;
     private GameRender render;
+    private float runTime = 0;
 
     public GameScreen(){
         Gdx.app.log("GameScreen", "attached");
@@ -26,7 +27,7 @@ public class GameScreen implements Screen {
         int midPointY = (int) (gameHeight / 2);
 
         world = new GameWorld(midPointY);
-        render = new GameRender(world);
+        render = new GameRender(world, (int) gameHeight, midPointY);
 
         Gdx.input.setInputProcessor(new InputHadler(world.getBird()));
     }
@@ -38,8 +39,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        runTime += delta;
         world.update(delta);//delta исползуем чтобы сделать обновление мира зависимым от FPS
-        render.render();
+        render.render(runTime);
     }
 
     @Override
