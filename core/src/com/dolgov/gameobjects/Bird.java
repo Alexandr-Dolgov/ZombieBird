@@ -22,6 +22,10 @@ public class Bird {
         acceleration = new Vector2(0, 460);
     }
 
+    public void onClick() {
+        velocity.y = -140;
+    }
+
     public float getX() {
         return position.x;
     }
