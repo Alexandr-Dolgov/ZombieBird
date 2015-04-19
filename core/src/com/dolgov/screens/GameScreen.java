@@ -2,7 +2,6 @@ package com.dolgov.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.dolgov.gameworld.GameRender;
 import com.dolgov.gameworld.GameWorld;
 
@@ -16,7 +15,16 @@ public class GameScreen implements Screen {
 
     public GameScreen(){
         Gdx.app.log("GameScreen", "attached");
-        world = new GameWorld();
+
+        float screenWidth = Gdx.graphics.getWidth();
+        float screenHeight = Gdx.graphics.getHeight();
+        float gameWidth = 136;
+        float scale = screenWidth / gameWidth;
+        float gameHeight = screenHeight / scale;
+
+        int midPointY = (int) (gameHeight / 2);
+
+        world = new GameWorld(midPointY);
         render = new GameRender(world);
     }
 
