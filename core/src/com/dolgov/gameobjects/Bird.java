@@ -21,4 +21,24 @@ public class Bird {
         velocity = new Vector2(0, 0);
         acceleration = new Vector2(0, 460);
     }
+
+    public float getX() {
+        return position.x;
+    }
+
+    public float getY() {
+        return  position.y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public float getRotation() {
+        return rotation;
+    }
 }
