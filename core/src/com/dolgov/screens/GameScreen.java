@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.dolgov.gameworld.GameRender;
 import com.dolgov.gameworld.GameWorld;
+import com.dolgov.zbhelpers.InputHadler;
 
 /**
  * Created by Alexandr on 16.04.2015.
@@ -26,6 +27,8 @@ public class GameScreen implements Screen {
 
         world = new GameWorld(midPointY);
         render = new GameRender(world);
+
+        Gdx.input.setInputProcessor(new InputHadler(world.getBird()));
     }
 
     @Override
