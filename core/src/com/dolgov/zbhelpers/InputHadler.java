@@ -1,11 +1,19 @@
 package com.dolgov.zbhelpers;
 
 import com.badlogic.gdx.InputProcessor;
+import com.dolgov.gameobjects.Bird;
 
 /**
  * Created by Alexandr on 19.04.2015.
  */
 public class InputHadler implements InputProcessor{
+
+    private Bird bird;
+
+    public InputHadler(Bird bird) {
+        this.bird = bird;
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         return false;
