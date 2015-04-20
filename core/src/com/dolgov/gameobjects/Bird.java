@@ -30,6 +30,14 @@ public class Bird {
         position.add(velocity.cpy().scl(delta));
     }
 
+    public boolean isFalled() {
+        return velocity.y > 110;
+    }
+
+    public boolean shouldntFlap() {
+        return velocity.y > 70;
+    }
+
     public void onClick() {
         velocity.y = -140;
     }
