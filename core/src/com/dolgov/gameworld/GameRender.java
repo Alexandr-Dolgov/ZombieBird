@@ -80,10 +80,25 @@ public class GameRender {
         // Птичке нужна прозрачность, поэтому включаем ее
         batcher.enableBlending();
 
-        // Отрисуем птичку на ее координатах. Получим Animation объект из AssetLoader
-        // Передадим runTime переменную чтобы получить текущий кадр.
-        batcher.draw(AssetLoader.birdAnimation.getKeyFrame(runTime),
-                bird.getX(), bird.getY(), bird.getWidth(), bird.getHeight());
+        if (bird.shouldntFlap()) {
+            batcher.draw(
+                    AssetLoader.bird,
+                    bird.getX(), bird.getY(),
+                    bird.getWidth() / 2.0f, bird.getHeight() / 2.0f,
+                    bird.getWidth(), bird.getHeight(),
+                    1, 1,
+                    bird.getRotation()
+            );
+        } else {
+            batcher.draw(
+                    AssetLoader.birdAnimation.getKeyFrame(runTime),
+                    bird.getX(), bird.getY(),
+                    bird.getWidth() / 2.0f, bird.getHeight() / 2.0f,
+                    bird.getWidth(), bird.getHeight(),
+                    1, 1,
+                    bird.getRotation()
+            );
+        }
 
         // Заканчиваем SpriteBatch
         batcher.end();
