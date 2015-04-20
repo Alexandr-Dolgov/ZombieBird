@@ -16,11 +16,12 @@ public class GameRender {
     private GameWorld world;
     private OrthographicCamera camera;
     private ShapeRenderer shapeRenderer;
-
     private SpriteBatch batcher;
 
     private int midPointY;
     private int gameHeight;
+
+    private Bird bird;
 
     public GameRender(GameWorld world, int gameHeight, int midPointY){
         this.world = world;
@@ -36,13 +37,16 @@ public class GameRender {
 
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(camera.combined);
+
+        initGameObjects();
+    }
+
+    private void initGameObjects() {
+        bird = world.getBird();
     }
 
     public void render(float runTime){
         Gdx.app.log("GameRender", "render");
-
-        // мы уберем это из цикла далее, для улучшения производительности
-        Bird bird = world.getBird();
 
         // Заполним задний фон одним цветом
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -83,6 +87,5 @@ public class GameRender {
 
         // Заканчиваем SpriteBatch
         batcher.end();
-
     }
 }
