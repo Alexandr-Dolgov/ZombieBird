@@ -123,7 +123,7 @@ public class GameRender {
         batcher.end();
 
         //отрисуем круг коллизий птицы
-        drawBindingCircle();
+        drawBinding();
     }
 
     private void drawGrass() {
@@ -173,7 +173,8 @@ public class GameRender {
                 pipe3.getWidth(), midPointY + 66 - (pipe3.getHeight() + 45));
     }
 
-    private void drawBindingCircle(){
+    /* временный метод для теста границ */
+    private void drawBinding(){
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.circle(
@@ -181,7 +182,41 @@ public class GameRender {
                 bird.getBoundingCircle().y,
                 bird.getBoundingCircle().radius
         );
+
+        /* код для теста границ прямоугольников */
+
+        // Верхний блок для труб 1, 2 и 3
+        shapeRenderer.rect(pipe1.getBarUp().x, pipe1.getBarUp().y,
+                pipe1.getBarUp().width, pipe1.getBarUp().height);
+        shapeRenderer.rect(pipe2.getBarUp().x, pipe2.getBarUp().y,
+                pipe2.getBarUp().width, pipe2.getBarUp().height);
+        shapeRenderer.rect(pipe3.getBarUp().x, pipe3.getBarUp().y,
+                pipe3.getBarUp().width, pipe3.getBarUp().height);
+
+        // Нижний блок для труб 1, 2 и 3
+        shapeRenderer.rect(pipe1.getBarDown().x, pipe1.getBarDown().y,
+                pipe1.getBarDown().width, pipe1.getBarDown().height);
+        shapeRenderer.rect(pipe2.getBarDown().x, pipe2.getBarDown().y,
+                pipe2.getBarDown().width, pipe2.getBarDown().height);
+        shapeRenderer.rect(pipe3.getBarDown().x, pipe3.getBarDown().y,
+                pipe3.getBarDown().width, pipe3.getBarDown().height);
+
+        // Черепа для верхних труб 1, 2 и 3
+        shapeRenderer.rect(pipe1.getSkullUp().x, pipe1.getSkullUp().y,
+                pipe1.getSkullUp().width, pipe1.getSkullUp().height);
+        shapeRenderer.rect(pipe2.getSkullUp().x, pipe2.getSkullUp().y,
+                pipe2.getSkullUp().width, pipe2.getSkullUp().height);
+        shapeRenderer.rect(pipe3.getSkullUp().x, pipe3.getSkullUp().y,
+                pipe3.getSkullUp().width, pipe3.getSkullUp().height);
+
+        // Черепа для нижних труб 1, 2 and 3
+        shapeRenderer.rect(pipe1.getSkullDown().x, pipe1.getSkullDown().y,
+                pipe1.getSkullDown().width, pipe1.getSkullDown().height);
+        shapeRenderer.rect(pipe2.getSkullDown().x, pipe2.getSkullDown().y,
+                pipe2.getSkullDown().width, pipe2.getSkullDown().height);
+        shapeRenderer.rect(pipe3.getSkullDown().x, pipe3.getSkullDown().y,
+                pipe3.getSkullDown().width, pipe3.getSkullDown().height);
+
         shapeRenderer.end();
     }
-
 }
