@@ -46,8 +46,6 @@ public class GameRender {
     }
 
     public void render(float runTime){
-        Gdx.app.log("GameRender", "render");
-
         // Заполним задний фон одним цветом
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
