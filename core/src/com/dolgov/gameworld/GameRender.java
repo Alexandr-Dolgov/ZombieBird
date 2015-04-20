@@ -1,6 +1,7 @@
 package com.dolgov.gameworld;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -120,6 +121,9 @@ public class GameRender {
 
         // Заканчиваем SpriteBatch
         batcher.end();
+
+        //отрисуем круг коллизий птицы
+        drawBindingCircle();
     }
 
     private void drawGrass() {
@@ -167,6 +171,17 @@ public class GameRender {
                 pipe3.getHeight());
         batcher.draw(AssetLoader.bar, pipe3.getX(), pipe3.getY() + pipe3.getHeight() + 45,
                 pipe3.getWidth(), midPointY + 66 - (pipe3.getHeight() + 45));
+    }
+
+    private void drawBindingCircle(){
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.circle(
+                bird.getBoundingCircle().x,
+                bird.getBoundingCircle().y,
+                bird.getBoundingCircle().radius
+        );
+        shapeRenderer.end();
     }
 
 }
