@@ -1,5 +1,8 @@
 package com.dolgov.gameobjects;
 
+import com.dolgov.gameworld.GameWorld;
+import com.dolgov.zbhelpers.AssetLoader;
+
 /**
  * Created by Alexandr on 20.04.2015.
  */
@@ -11,7 +14,11 @@ public class ScrollHandler {
     public static final int SCROLL_SPEED = -59;
     public static final int PIPE_GAP = 49;
 
-    public ScrollHandler(float yPos) {
+    private GameWorld gameWorld;
+
+    public ScrollHandler(GameWorld gameWorld, float yPos) {
+        this.gameWorld = gameWorld;
+
         frontGrass = new Grass(0, yPos, 143, 11, SCROLL_SPEED);
         backGrass = new Grass(frontGrass.getTailX(), yPos, 143, 11, SCROLL_SPEED);
 
@@ -55,7 +62,25 @@ public class ScrollHandler {
 
     // вернуть True если какая-нибудь из труб коснулась птицы
     public boolean collides(Bird bird) {
-        return (pipe1.collides(bird) || pipe2.collides(bird) || pipe3.collides(bird));
+        if (!pipe1.isScored()
+                && (pipe1.getX() + (pipe1.getWidth() / 2)) < (bird.getX() + bird.getWidth()) ) {
+            addScore(1);
+            pipe1.setScored(true);
+            AssetLoader.coin.play();
+        } else if (!pipe2.isScored()
+                && (pipe2.getX() + (pipe2.getWidth() / 2)) < (bird.getX() + bird.getWidth()) ) {
+            addScore(1);
+            pipe2.setScored(true);
+            AssetLoader.coin.play();
+        } else if (!pipe3.isScored()
+                && (pipe3.getX() + (pipe3.getWidth() / 2)) < (bird.getX() + bird.getWidth()) ) {
+            addScore(1);
+            pipe3.setScored(true);
+            AssetLoader.coin.play();
+        }
+
+        return (pipe1.collides(bird) || pipe2.collides(bird) || pipe3
+                .collides(bird));
     }
 
     public Grass getFrontGrass() {
@@ -76,5 +101,9 @@ public class ScrollHandler {
 
     public Pipe getPipe3() {
         return pipe3;
+    }
+
+    private void addScore(int increment) {
+        gameWorld.addScore(increment);
     }
 }

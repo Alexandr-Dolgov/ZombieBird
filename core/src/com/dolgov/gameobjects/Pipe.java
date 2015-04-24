@@ -20,6 +20,8 @@ public class Pipe extends Scrollable {
 
     private float groundY;
 
+    private boolean isScored = false;
+
     public Pipe(float x, float y, int width, int height, float scrollSpeed, float groundY) {
         super(x, y, width, height, scrollSpeed);
         random = new Random();
@@ -68,6 +70,7 @@ public class Pipe extends Scrollable {
     public void reset(float newX) {
         super.reset(newX);
         height = random.nextInt(90) + 15;
+        isScored = false;
     }
 
     public boolean collides(Bird bird) {
@@ -95,5 +98,13 @@ public class Pipe extends Scrollable {
 
     public Rectangle getBarDown() {
         return barDown;
+    }
+
+    public boolean isScored() {
+        return isScored;
+    }
+
+    public void setScored(boolean b) {
+        isScored = b;
     }
 }
