@@ -118,6 +118,16 @@ public class GameRender {
             );
         }
 
+        // Переводим int в String
+        String score = world.getScore() + "";
+
+        // Отрисуем тень
+        AssetLoader.shadow.draw(batcher, "" + world.getScore(), (136 / 2)
+                - (3 * score.length()), 12);
+        // Отрисуем сам текст
+        AssetLoader.font.draw(batcher, "" + world.getScore(), (136 / 2)
+                - (3 * score.length() - 1), 11);
+
         // Заканчиваем SpriteBatch
         batcher.end();
     }
