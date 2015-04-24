@@ -14,6 +14,7 @@ public class GameWorld {
     private Bird bird;
     private ScrollHandler scroller;
     private Rectangle ground;
+    private int score = 0;
 
     public GameWorld(int midPointY) {
         bird = new Bird(33, midPointY - 5, 17, 12);
@@ -49,5 +50,13 @@ public class GameWorld {
 
     public ScrollHandler getScroller() {
         return scroller;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void addScore(int increment) {
+        score += increment;
     }
 }
