@@ -22,6 +22,7 @@ public class GameRender {
     private SpriteBatch batcher;
 
     private int midPointY;
+    private int gameWidth;
     private int gameHeight;
 
     // Game Objects
@@ -30,14 +31,15 @@ public class GameRender {
     private Grass frontGrass, backGrass;
     private Pipe pipe1, pipe2, pipe3;
 
-    public GameRender(GameWorld world, int gameHeight, int midPointY){
+    public GameRender(GameWorld world, int gameWidth, int gameHeight, int midPointY){
         this.world = world;
 
+        this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         this.midPointY = midPointY;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(true, 136, gameHeight);
+        camera.setToOrtho(true, gameWidth, gameHeight);
 
         batcher = new SpriteBatch();
         batcher.setProjectionMatrix(camera.combined);
@@ -68,15 +70,15 @@ public class GameRender {
 
         // Отрисуем Background цвет
         shapeRenderer.setColor(55 / 255.0f, 80 / 255.0f, 100 / 255.0f, 1);
-        shapeRenderer.rect(0, 0, 136, midPointY + 66);
+        shapeRenderer.rect(0, 0, gameWidth, midPointY + 66);
 
         // Отрисуем Grass
         shapeRenderer.setColor(111 / 255.0f, 186 / 255.0f, 45 / 255.0f, 1);
-        shapeRenderer.rect(0, midPointY + 66, 136, 11);
+        shapeRenderer.rect(0, midPointY + 66, gameWidth, 11);
 
         // Отрисуем Dirt
         shapeRenderer.setColor(147 / 255.0f, 80 / 255.0f, 27 / 255.0f, 1);
-        shapeRenderer.rect(0, midPointY + 77, 136, 52);
+        shapeRenderer.rect(0, midPointY + 77, gameWidth, 52);
 
         // Заканчиваем ShapeRenderer
         shapeRenderer.end();
@@ -86,7 +88,7 @@ public class GameRender {
         // Отменим прозрачность
         // Это хорошо для производительности, когда отрисовываем картинки без прозрачности
         batcher.disableBlending();
-        batcher.draw(AssetLoader.bg, 0, midPointY + 23, 136, 43);
+        batcher.draw(AssetLoader.bg, 0, midPointY + 23, gameWidth, 43);
 
         // 1. Отрисовываем Grass
         drawGrass();
@@ -122,9 +124,9 @@ public class GameRender {
         String score = world.getScore() + "";
 
         // Отрисуем тень
-        AssetLoader.shadow.draw(batcher, score, (136 / 2) - (3 * score.length()), 12);
+        AssetLoader.shadow.draw(batcher, score, (gameWidth / 2) - (3 * score.length()), 12);
         // Отрисуем сам текст
-        AssetLoader.font.draw(batcher, score, (136 / 2) - (3 * score.length() - 1), 11);
+        AssetLoader.font.draw(batcher, score, (gameWidth / 2) - (3 * score.length() - 1), 11);
 
         // Заканчиваем SpriteBatch
         batcher.end();
