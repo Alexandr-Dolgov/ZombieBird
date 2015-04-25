@@ -2,16 +2,19 @@ package com.dolgov.zbhelpers;
 
 import com.badlogic.gdx.InputProcessor;
 import com.dolgov.gameobjects.Bird;
+import com.dolgov.gameworld.GameWorld;
 
 /**
  * Created by Alexandr on 19.04.2015.
  */
 public class InputHadler implements InputProcessor{
 
+    private GameWorld world;
     private Bird bird;
 
-    public InputHadler(Bird bird) {
-        this.bird = bird;
+    public InputHadler(GameWorld world) {
+        this.world = world;
+        bird = world.getBird();
     }
 
     @Override
@@ -31,7 +34,16 @@ public class InputHadler implements InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (world.isReady()) {
+            world.start();
+        }
+
         bird.onClick();
+
+        if (world.isGameOver()) {
+            world.restart();
+        }
+
         return true;    //сообщаем что обработали касание
     }
 
